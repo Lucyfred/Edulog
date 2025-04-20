@@ -1,5 +1,7 @@
 RewriteEngine On
 
+ErrorDocument 404 /cms/includes/404.html
+
 RewriteCond %{REQUEST_URI} !^/login$
 RewriteRule ^$ cms/login.php [L]
 RewriteRule ^login$ cms/login.php [L]
