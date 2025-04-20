@@ -1,0 +1,5 @@
+RewriteEngine On
+
+RewriteRule ^$ cms/login.php [L]
+RewriteRule ^login$ cms/login.php [L]
+RewriteRule ^index$ cms/index.php [L]
