@@ -19,7 +19,7 @@ function isLogged(){
 function login($email, $pass){
     global $conn;
 
-    $query = "SELECT * FROM usuarios WHERE email = ? AND clave = ?";
+    $query = "SELECT * FROM usuario WHERE email = ? AND clave = ?";
 
     $stmt = $conn -> prepare($query);
     $stmt->bind_param("ss", $email, $pass);
