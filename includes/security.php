@@ -28,7 +28,7 @@ function login($email, $pass){
 
     if(mysqli_num_rows($result) > 0){
         $data = $result->fetch_assoc();
-        $_SESSION["user_id"] = $data["id"];
+        $_SESSION["user_id"] = $data["id_usuario"];
         return array("success" => true, "message" => "Login correcto");
     } else{
         return array("success" => false, "message" => "Usuario o contraseña incorrectos");
