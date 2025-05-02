@@ -11,10 +11,18 @@ echo <<<HTML
             </div>
         </div>
         <div class="me-5">
-            <!-- <a href="" class="menu_user"><i class="bi bi-person"></i></a> -->
             <div class="dropdown">
                 <a class="menu_user" id="dropdownMenuUser" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person"></i>
+HTML;
+
+if(check_avatar($_SESSION["user_id"]) == true){
+    echo '<img src="' . $url_site . '/cms/assets/img/avatar/' . user_info($_SESSION["user_id"])["avatar"] . '" class="rounded-circle shadow avatar-sm" alt="avatar" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'inline-block\';">';
+} else{
+    echo '<i class="bi bi-person"></i>';
+}
+
+echo <<<HTML
+                <i class="bi bi-person" style="display:none;"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuUser">
                     <li><a class="dropdown-item" href="{$logOut}">Cerrar sesión</a></li>

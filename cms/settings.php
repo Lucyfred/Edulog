@@ -41,7 +41,7 @@ $datos = user_info($_SESSION["user_id"]);
                         <div class="d-flex mb-3">
                             <h2>Usuario</h2>
                         </div>
-                        <div class="d-flex flex-column flex-md-row">
+                        <div class="d-flex flex-column flex-md-row mb-3">
                             <div class="d-flex mb-2">
                                 <div class="me-4">
                                     <label for="nombre_usuario" class="mb-2">Nombre</label>
@@ -54,6 +54,17 @@ $datos = user_info($_SESSION["user_id"]);
                                     <input type="email" id="email_usuario" class="form-control" value="<?= $datos["email"] ?>" disabled></input>
                                 </div>
                             </div>
+                        </div>
+                        <div class="d-flex d-inline-block mb-3 ms-4">
+                            <?php if(check_avatar($_SESSION["user_id"]) == true && file_exists($dir .'/cms/assets/img/avatar/' . $datos["avatar"])){ ?>
+                                <img src="<?= $url_site ?>/cms/assets/img/avatar/<?= $datos["avatar"] ?>" class="rounded-circle shadow avatar" alt="avatar"></img>
+                            <?php }else{ ?>
+                                <img src="<?= $url_site ?>/cms/assets/img/avatar/avatar-settings.png" class="rounded-circle shadow avatar" alt=""></img>
+                            <?php } ?>
+                        </div>
+                        <div class="d-flex d-inline-block">
+                            <button type="button" class="btn btn-dark me-3">Cambiar avatar</button>
+                            <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                         </div>
                     </div>
                     <hr>

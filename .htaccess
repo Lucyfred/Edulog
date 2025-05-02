@@ -1,5 +1,7 @@
 RewriteEngine On
+Options -Indexes
 
+ErrorDocument 403 /cms/includes/404.html
 ErrorDocument 404 /cms/includes/404.html
 
 RewriteCond %{REQUEST_URI} !^/login$
@@ -8,3 +10,10 @@ RewriteRule ^login$ cms/login.php [L]
 RewriteRule ^index$ cms/index.php [L]
 RewriteRule ^fichas$ cms/fichas.php [L]
 RewriteRule ^ajustes$ cms/settings.php [L]
+
+<FilesMatch "\.(jpg|jpeg|png|gif)$">
+    SetEnvIf Referer "^http://192\.168\.1\.130" allow_from_local
+    Order Deny,Allow
+    Deny from all
+    Allow from env=allow_from_local
+</FilesMatch>

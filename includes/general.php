@@ -29,3 +29,33 @@ function user_info($id){
 
     return $result->fetch_assoc();
 }
+
+/**
+ * Revisa si existe un avatar en el usuario
+ * @param id - int - ID del usuario
+ * @return boolean
+ */
+function check_avatar($id){
+    global $conn;
+
+    $query = "SELECT avatar 
+        FROM usuario
+        WHERE id_usuario = ?";
+    $stmt = $conn->prepare($query);
+
+    if (!$stmt) {
+        return false;
+    }
+
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    $data = $result->fetch_assoc();
+
+    if($data["avatar"] !== NULL){
+        return true;
+    } else{
+        return false;
+    }
+}
