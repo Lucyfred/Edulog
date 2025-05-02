@@ -19,7 +19,7 @@ logOut();
     <div class="container position-relative d-flex align-items-center justify-content-center fullScreen" id="mainDiv">
         <div class="position-absolute divLogo pb">
             <div class="text-center logo">
-                <p>Edulog</p>
+                <p class="user-select-none">Edulog</p>
             </div>
         </div>
         <div class="row div-circles">
