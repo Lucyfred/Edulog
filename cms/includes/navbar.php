@@ -7,7 +7,7 @@ echo <<<HTML
     <div class="navbar main-navbar d-flex">
         <div class="bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand logo-md text-white" href="{$url_site}">Edulog</a>
+                <a class="navbar-brand logo-md text-white" href="{$url_site}/index">Edulog</a>
             </div>
         </div>
         <div class="me-5">

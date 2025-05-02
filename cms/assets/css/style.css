@@ -5,6 +5,22 @@
     --black: #262626;
 }
 
+.font1{
+    font-family: "Roboto", sans-serif;
+}
+
+.fontSizeLg{
+    font-size: 22px;
+}
+
+.fontSizeMd{
+    font-size: 18px;
+}
+
+.fontSizeSm{
+    font-size: 16px;
+}
+
 .mainBoton{
     background-color: #00EAD3;
 }
