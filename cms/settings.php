@@ -57,13 +57,14 @@ $datos = user_info($_SESSION["user_id"]);
                         </div>
                         <div class="d-flex d-inline-block mb-3 ms-4">
                             <?php if(check_avatar($_SESSION["user_id"]) == true && file_exists($dir .'/cms/assets/img/avatar/' . $datos["avatar"])){ ?>
-                                <img src="<?= $url_site ?>/cms/assets/img/avatar/<?= $datos["avatar"] ?>" class="rounded-circle shadow avatar" alt="avatar"></img>
+                                <img src="<?= $url_site ?>/cms/assets/img/avatar/<?= $datos["avatar"] ?>" class="rounded-circle shadow avatar" alt="avatar" id="avatar"></img>
                             <?php }else{ ?>
                                 <img src="<?= $url_site ?>/cms/assets/img/avatar/avatar-settings.png" class="rounded-circle shadow avatar" alt=""></img>
                             <?php } ?>
                         </div>
                         <div class="d-flex d-inline-block">
-                            <button type="button" class="btn btn-dark me-3">Cambiar avatar</button>
+                            <input type="file" id="avatar-file" style="display: none;">
+                            <button type="file" class="btn btn-dark me-3" id="upload-avatar" onclick="document.getElementById('avatar-file').click();">Cambiar avatar</button>
                             <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                         </div>
                     </div>

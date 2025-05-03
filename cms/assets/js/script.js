@@ -121,3 +121,30 @@ function emailCheck(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
 }
+
+$(document).ready(function(){
+  $("#avatar-file").on("change", function(){
+    let file = this.files[0];
+    if(!file){
+      return;
+    }
+
+    let formData = new FormData();
+    formData.append("archivo", file);
+    
+    $.ajax({
+      url: "/cms/includes/upload-avatar.php",
+      method: "POST",
+      processData: false,
+      contentType: false,
+      data: formData,
+      success: function(res){
+        if(res === "200"){
+          $("#avatar").attr();
+        }
+      }
+    })
+
+  })
+  const avatar = document.getElementById("avatar-file").files[0];
+})
