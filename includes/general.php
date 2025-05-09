@@ -8,7 +8,7 @@ $dominio = $_SERVER['HTTP_HOST'];
 $url_site = $protocolo . "://" . $dominio;
 
 /**
- * Revisa si el usuario hizo el primero login
+ * Revisa si el usuario hizo el primer login
  * @param id - Int - ID del usuario
  * @return bool - Devuelve un booleano
  */

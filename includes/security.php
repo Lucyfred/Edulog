@@ -6,6 +6,10 @@ include_once($dir . "/includes/database.php");
 
 session_start();
 
+/**
+ * Devuelve si el usuario está logueado
+ * @return bool
+ */
 function isLogged(){
     return (int) $_SESSION["user_id"] > 0;
 }

@@ -32,7 +32,7 @@ if (first_login($_SESSION["user_id"]) !== 0) {
                 <div>
                     <h1 class="text-center">Bienvenid@ a Edulog</h1>
                     <br>
-                    <form id="form-datos" method="POST" action="<?= $url_site ?>/">
+                    <form id="form-datos" method="POST" action="<?= $url_site ?>/cms/includes/update_datos.php">
                         <label class="form-label" for="nombre">Nombre:</label>
                         <input type="text" class="form-control mb-3" name="inp-nombre" id="nombre" required>
                         <label class="form-label" for="apellidos">Apellidos:</label>
@@ -40,7 +40,7 @@ if (first_login($_SESSION["user_id"]) !== 0) {
                         <label class="form-label" for="fp">Ciclo formativo:</label>
                         <input type="text" class="form-control mb-3" name="inp-fp" id="fp" required>
                         <label class="form-label" for="grado">Grado:</label>
-                        <select class="form-control mb-3" name="input-grado" id="grado" required>
+                        <select class="form-control mb-3" name="inp-grado" id="grado" required>
                             <option value="" selected disabled>Elija un grado</option>
                             <option value="1">Grado medio</option>
                             <option value="2">Grado superior</option>
