@@ -2,7 +2,7 @@
 
 $dir = $_SERVER["DOCUMENT_ROOT"];
 
-session_start();
+// session_start();
 
 include_once($dir . "/includes/general.php");
 include_once($dir . "/includes/security.php");

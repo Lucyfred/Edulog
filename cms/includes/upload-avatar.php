@@ -1,5 +1,7 @@
 <?php
 
+// session_start();
+
 $dir = $_SERVER["DOCUMENT_ROOT"];
 
 include_once($dir . "/includes/general.php");
@@ -13,6 +15,11 @@ $location = $dir . "/cms/assets/img/avatar/";
 $nombre_avatar = "avatar" . $_SESSION["user_id"];
 $extension = pathinfo($_FILES["archivo"]["name"], PATHINFO_EXTENSION);
 $files = glob($location . $nombre_avatar . ".*");
+
+global $conn;
+
+$query = 'UPDATE usuario SET avatar = "'. $nombre_avatar . "." . $extension . '" WHERE id_usuario = ' . $_SESSION["user_id"];
+$stmt = $conn -> query($query);
 
 foreach($files as $file){
     if(is_file($file)){

@@ -6,12 +6,16 @@ include_once($dir . "/includes/general.php");
 include_once($dir . "/includes/security.php");
 
 
-// ini_set('display_errors', '1');
-// ini_set('display_startup_errors', '1');
-// error_reporting(E_ALL);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 if(!isLogged()){
     header("LOCATION: login");
+}
+
+if(first_login($_SESSION["user_id"]) === 0){
+    header("LOCATION: datos");
 }
 
 ?>

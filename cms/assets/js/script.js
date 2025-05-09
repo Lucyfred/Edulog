@@ -45,7 +45,7 @@ $(document).ready(function () {
     });
   }
 
-  if(urlLocation === "/login" || urlLocation === "/"){
+  if(urlLocation === "/login" || urlLocation === "/" || urlLocation === "/datos"){
     redCircle();
     purpleCircle();
     blueCircle();
