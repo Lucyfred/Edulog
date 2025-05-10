@@ -45,8 +45,12 @@ if (first_login($_SESSION["user_id"]) !== 0) {
                             <option value="1">Grado medio</option>
                             <option value="2">Grado superior</option>
                         </select>
+                        <label class="form-label" for="nombre-esc">Nombre del centro:</label>
+                        <input type="text" class="form-control mb-3" name="inp-nombre-esc" id="nombre-esc" required>
                         <label class="form-label" for="tutor-esc">Nombre del tutor escolar:</label>
                         <input type="text" class="form-control mb-3" name="inp-tutor-esc" id="tutor-esc" required>
+                        <label class="form-label" for="nombre-lab">Nombre de la empresa:</label>
+                        <input type="text" class="form-control mb-3" name="inp-nombre-lab" id="nombre-lab" required>
                         <label class="form-label" for="tutor-lab">Nombre del tutor laboral:</label>
                         <input type="text" class="form-control mb-3" name="inp-tutor-lab" id="tutor-lab" required>
                         <label class="form-label" for="pass">Contraseña:</label>

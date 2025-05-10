@@ -23,17 +23,21 @@ function isLogged(){
 function login($email, $pass){
     global $conn;
 
-    $query = "SELECT * FROM usuario WHERE email = ? AND contrasena = ?";
+    $query = "SELECT * FROM usuario WHERE email = ?";
 
     $stmt = $conn -> prepare($query);
-    $stmt->bind_param("ss", $email, $pass);
+    $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if(mysqli_num_rows($result) > 0){
         $data = $result->fetch_assoc();
-        $_SESSION["user_id"] = $data["id_usuario"];
-        return array("success" => true, "message" => "Login correcto");
+        if(password_verify($pass, $data["contrasena"])){
+            $_SESSION["user_id"] = $data["id_usuario"];
+            return array("success" => true, "message" => "Login correcto");
+        } else{
+            return array("success" => false, "message" => "Usuario o contraseña incorrectos");
+        }
     } else{
         return array("success" => false, "message" => "Usuario o contraseña incorrectos");
     }

@@ -86,12 +86,6 @@ $datos = user_info($_SESSION["user_id"]);
                                     <input type="email" id="tutor_empresa" class="form-control" value="<?= $datos["tutor"] ?>" disabled></input>
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div>
-                                    <label for="contacto_empresa" class="mb-2">Contacto</label>
-                                    <input type="email" id="contacto_empresa" class="form-control" value="<?= $datos["contacto"] ?>" disabled></input>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

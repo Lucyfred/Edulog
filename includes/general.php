@@ -38,8 +38,7 @@ function user_info($id){
 
     $query = "SELECT *, 
         (SELECT nombre FROM empresa e WHERE e.id_empresa = u.id_empresa) as empresa,
-        (SELECT tutor_empresa FROM empresa e WHERE e.id_empresa = u.id_empresa) as tutor,
-        (SELECT contacto FROM empresa e WHERE e.id_empresa = u.id_empresa) as contacto 
+        (SELECT tutor_empresa FROM empresa e WHERE e.id_empresa = u.id_empresa) as tutor
         FROM usuario u 
         WHERE id_usuario = ?";
     $stmt = $conn->prepare($query);
