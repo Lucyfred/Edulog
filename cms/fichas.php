@@ -3,6 +3,7 @@
 $dir = $_SERVER["DOCUMENT_ROOT"];
 
 include_once($dir . "/includes/general.php");
+include_once($dir . "/cms/includes/checkeo.php");
 
 ?>
 
