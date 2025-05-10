@@ -2,10 +2,10 @@
 
 $url = $_SERVER['REQUEST_URI'];
 
-$activoHome = ($url == '/index.php') ? 'activo' : '';
-$activoFichas = ($url == '/fichas.php') ? 'activo' : '';
-$activoPlantillas = ($url == '/plantillas.php') ? 'activo' : '';
-$activoAjustes = ($url == '/ajustes.php') ? 'activo' : '';
+$activoHome = ($url == '/index') ? 'activo' : '';
+$activoFichas = ($url == '/fichas') ? 'activo' : '';
+$activoPlantillas = ($url == '/plantillas') ? 'activo' : '';
+$activoAjustes = ($url == '/ajustes') ? 'activo' : '';
 
 echo <<<HTML
     <div class="main-menu">
