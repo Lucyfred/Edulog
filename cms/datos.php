@@ -1,12 +1,9 @@
 <?php
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
 $dir = $_SERVER["DOCUMENT_ROOT"];
 
 include_once($dir . "/includes/general.php");
+include_once($dir . "/cms/includes/showErrors.php");
 
 if (!isLogged()) {
     header("LOCATION: login");
@@ -197,13 +194,18 @@ if (first_login($_SESSION["user_id"]) !== 0) {
                 }
 
                 $.ajax({
-                    url: "<?= $url_site ?>" + "/cms/includes/update_datos.php",
+                    url: "<?= $url_site ?>" + "/cms/includes/ajax/update_datos.php",
                     method: "POST",
                     data: $("#form-datos").serialize(),
                     success: function(res){
                         if(res.success == "false"){
                             $("#alert").remove();
                             $("#div-form").append(`<div class="alert alert-danger mt-4" id="alert">${res.message}</div>`);
+                            setTimeout(function(){
+                                $("#alert").fadeOut(10000, function(){
+                                    $(this).remove();
+                                })
+                            })
                         } else if(res.success = "true"){
                             window.location.href = res.redirect;
                         }

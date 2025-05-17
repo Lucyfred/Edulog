@@ -29,7 +29,7 @@ logOut();
                     <p class="mb-4">Introduce el email y contraseña <br> para iniciar sesión en Edulog</p>
                     <form id="loginForm" method="POST">
                         <input type="email" class="form-control mb-3" name="email" id="email" placeholder="email@dominio.com">
-                        <input type="password" class="form-control mb-3" name="pass" id="pass" placeholder="contraseña">
+                        <input type="password" class="form-control mb-3" name="passLogin" id="passLogin" placeholder="contraseña">
                         <input type="submit" class="form-control mainBoton mb-4" name="submit" id="submitLogin" value="Iniciar sesión">
                         <p>¿Has olvidado la contraseña?</p>
                     </form>

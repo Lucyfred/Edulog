@@ -1,12 +1,10 @@
 <?php
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
 $dir = $_SERVER["DOCUMENT_ROOT"];
 
 include_once($dir . "/includes/general.php");
+include_once($dir . "/cms/includes/showErrors.php");
+
 
 if (!isLogged()) {
     header("LOCATION: login");
@@ -44,24 +42,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Update datos centro
     try {
-        $query_select = "SELECT * FROM centro WHERE nombre = ? AND tutor = ?";
-        $stmt = $conn->prepare($query_select);
-        $stmt->bind_param("ss", $nombre_esc, $tutor_esc);
+        $query = "INSERT INTO centro(nombre, tutor, id_usuario) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ssi", $nombre_esc, $tutor_esc, $id);
         $stmt->execute();
-        $result = $stmt->get_result();
+        $id_centro = $conn->insert_id;
         $stmt->close();
-
-        if ($result->num_rows > 0) {
-            $fila = $result->fetch_assoc();
-            $id_centro = $fila["id_centro"];
-        } else {
-            $query = "INSERT INTO centro(nombre, tutor) VALUES (?, ?)";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("ss", $nombre_esc, $tutor_esc);
-            $stmt->execute();
-            $id_centro = $conn->insert_id;
-            $stmt->close();
-        }
     } catch (mysqli_sql_exception $e) {
         error_log("Ocurrió un error: " . $e->getMessage());
         $message = ([
@@ -74,29 +60,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Update datos laboral
     try {
-        $query_select = "SELECT * FROM empresa WHERE nombre = ? AND tutor_empresa = ?";
-        $stmt = $conn->prepare($query_select);
-        $stmt->bind_param("ss", $nombre_lab, $tutor_lab);
+        $query = "INSERT INTO empresa(nombre, tutor_empresa, id_usuario) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ssi", $nombre_lab, $tutor_lab, $id);
         $stmt->execute();
-        $result = $stmt->get_result();
+        $id_lab = $conn->insert_id;
         $stmt->close();
-
-        if ($result->num_rows > 0) {
-            $fila = $result->fetch_assoc();
-            $id_lab = $fila["id_empresa"];
-        } else {
-            $query = "INSERT INTO empresa(nombre, tutor_empresa) VALUES (?, ?)";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("ss", $nombre_lab, $tutor_lab);
-            $stmt->execute();
-            $id_lab = $conn->insert_id;
-            $stmt->close();
-        }
     } catch (mysqli_sql_exception $e) {
         error_log("Ocurrió un error: " . $e->getMessage());
         $message = ([
             "success" => "false",
-            "message" => "Ocurrió un error al actualizar los datos."
+            "message" => "Ocurrió un error al actualizar los datos." . $e->getMessage()
         ]);
         echo json_encode($message);
         exit;

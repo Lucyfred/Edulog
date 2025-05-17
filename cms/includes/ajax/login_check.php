@@ -10,7 +10,7 @@ $resp = ["success" => false, "message" => "Hubo un error, inténtelo de nuevo m�
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     $email = $_POST["email"];
-    $pass = $_POST["pass"];
+    $pass = $_POST["passLogin"];
 
     if(strlen($_POST["email"]) == 0){
         $resp["message"] = "Campo email incompleto";
@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         exit;
     }
 
-    if(strlen($_POST["pass"]) == 0){
+    if(strlen($_POST["passLogin"]) == 0){
         $resp["message"] = "Campo contraseña es obligatorio";
         echo json_encode($resp);
         exit;

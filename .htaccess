@@ -10,6 +10,7 @@ RewriteRule ^login$ cms/login.php [L]
 RewriteRule ^datos$ cms/datos.php [L]
 RewriteRule ^index$ cms/index.php [L]
 RewriteRule ^fichas$ cms/fichas.php [L]
+RewriteRule ^usuarios$ cms/users.php [L]
 RewriteRule ^ajustes$ cms/settings.php [L]
 
 <FilesMatch "\.(jpg|jpeg|png|gif)$">

@@ -1,267 +1,335 @@
 /* COLORES */
 
 :root {
-  --blue: #00ead3;
-  --black: #262626;
+    --blue: #00ead3;
+    --black: #262626;
 }
 
 .font1 {
-  font-family: "Roboto", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .fontSizeLg {
-  font-size: 22px;
+    font-size: 22px;
 }
 
 .fontSizeMd {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .fontSizeSm {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 .mainBoton {
-  background-color: #00ead3;
+    background-color: #00ead3;
 }
 
 /* MARGENES */
 
 .pb {
-  padding-bottom: 700px;
+    padding-bottom: 700px;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  background-color: #262626;
-  color: white;
-  overflow-x: hidden;
+    background-color: #262626;
+    color: white;
+    overflow-x: hidden;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container-bott {
+    min-height: calc(100vh - 128px);
 }
 
 .rb {
-  border: 2px solid red;
+    border: 2px solid red;
 }
 
 .yb {
-  border: 2px solid yellow;
+    border: 2px solid yellow;
 }
 
 .gb {
-  border: 2px solid green;
+    border: 2px solid green;
 }
 
 .unst {
-  all: unset;
+    all: unset;
 }
 
 .purpleCircle {
-  width: 450px;
-  height: 450px;
-  background-color: #5e00ff;
-  border-radius: 200px;
-  filter: blur(3.5rem);
-  opacity: 6%;
-}
-
-.blueCircle {
-  width: 550px;
-  height: 550px;
-  background-color: #0066ff;
-  border-radius: 200px;
-  filter: blur(2.5rem);
-  opacity: 6%;
-}
-
-.redCircle {
-  width: 500px;
-  height: 500px;
-  background-color: #ff0004;
-  border-radius: 200px;
-  filter: blur(3.5rem);
-  opacity: 6%;
-}
-
-.fullScreen {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.divLogo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-}
-
-.div-circles {
-  width: 50vw;
-  height: 50vh;
-}
-
-.maxWidth {
-  width: 100%;
-  height: 100%;
-}
-
-#divForm {
-  color: #ffffff;
-  width: 400px;
-  height: 325px;
-  z-index: 10;
-  font-family: "Inter", sans-serif;
-}
-
-.opacityDiv {
-  opacity: 75%;
-}
-
-.logo {
-  font-family: "Comfortaa", sans-serif;
-  font-size: 5rem;
-}
-
-.logo-md {
-  font-family: "Comfortaa", sans-serif;
-  font-size: 4rem;
-}
-
-.logo-sm {
-  font-family: "Comfortaa", sans-serif;
-  font-size: 3rem;
-}
-
-.main-navbar {
-  width: auto;
-  min-height: 140px;
-}
-
-.main-menu {
-  width: 300px;
-  height: 100%;
-}
-
-.fp {
-  width: 100vw;
-  height: 100vh;
-  margin: 0px;
-  padding: 0px;
-}
-
-.menu-option {
-  width: 100%;
-  height: 60px;
-  border-top: 1px solid #3b3b3b;
-  border-bottom: 1px solid #3b3b3b;
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.menu-option:hover {
-  color: black;
-  background-color: var(--blue);
-}
-
-.main-frame {
-  width: 100%;
-  height: auto;
-  background-color: #333333;
-}
-
-.menu_user {
-  all: unset;
-  cursor: pointer;
-  font-size: 30px;
-}
-
-.menu_user:hover {
-  color: var(--blue);
-}
-
-.file-card {
-  background-color: var(--black);
-  border: 1px solid #4e4e4e;
-}
-
-.activo {
-  background-color: var(--blue);
-  color: black;
-}
-
-.avatar {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-}
-
-.avatar-sm {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-}
-
-@media only screen and (max-width: 700px) {
-  .purpleCircle {
-    width: 250px;
-    height: 250px;
+    width: 450px;
+    height: 450px;
     background-color: #5e00ff;
     border-radius: 200px;
     filter: blur(3.5rem);
     opacity: 6%;
-  }
+}
 
-  .blueCircle {
-    width: 350px;
-    height: 350px;
+.blueCircle {
+    width: 550px;
+    height: 550px;
     background-color: #0066ff;
     border-radius: 200px;
     filter: blur(2.5rem);
     opacity: 6%;
-  }
+}
 
-  .redCircle {
-    width: 300px;
-    height: 300px;
+.redCircle {
+    width: 500px;
+    height: 500px;
     background-color: #ff0004;
     border-radius: 200px;
     filter: blur(3.5rem);
     opacity: 6%;
-  }
+}
 
-  .div-circles {
-    width: 40vw;
-    height: 40vh;
-  }
+.fullScreen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-  .pb {
-    padding-bottom: 480px;
-  }
+.divLogo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
 
-  #mainDiv {
-    margin-top: 70px;
-  }
+.div-circles {
+    width: 50vw;
+    height: 50vh;
+}
+
+.maxWidth {
+    width: 100%;
+    height: 100%;
+}
+
+#divForm {
+    color: #ffffff;
+    width: 400px;
+    height: 325px;
+    z-index: 10;
+    font-family: "Inter", sans-serif;
+}
+
+.opacityDiv {
+    opacity: 75%;
+}
+
+.logo {
+    font-family: "Comfortaa", sans-serif;
+    font-size: 5rem;
+}
+
+.logo-md {
+    font-family: "Comfortaa", sans-serif;
+    font-size: 4rem;
+}
+
+.logo-sm {
+    font-family: "Comfortaa", sans-serif;
+    font-size: 3rem;
+}
+
+.main-navbar {
+    width: 100%;
+    padding: 1rem;
+    height: auto;
+}
+
+.main-menu {
+    width: 300px;
+    height: 100%;
+}
+
+.fp {
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0px;
+    padding: 0px;
+}
+
+.menu-option {
+    width: 100%;
+    height: 60px;
+    border-top: 1px solid #3b3b3b;
+    border-bottom: 1px solid #3b3b3b;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.menu-option:hover {
+    color: black;
+    background-color: var(--blue);
+}
+
+.main-frame {
+    width: 100%;
+    height: auto;
+    background-color: #333333;
+}
+
+.menu_user {
+    all: unset;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.menu_user:hover {
+    color: var(--blue);
+}
+
+.file-card {
+    background-color: var(--black);
+    border: 1px solid #4e4e4e;
+}
+
+.activo {
+    background-color: var(--blue) !important;
+    color: black;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.avatar-sm {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 700px) {
+    .purpleCircle {
+        width: 250px;
+        height: 250px;
+        background-color: #5e00ff;
+        border-radius: 200px;
+        filter: blur(3.5rem);
+        opacity: 6%;
+    }
+
+    .blueCircle {
+        width: 350px;
+        height: 350px;
+        background-color: #0066ff;
+        border-radius: 200px;
+        filter: blur(2.5rem);
+        opacity: 6%;
+    }
+
+    .redCircle {
+        width: 300px;
+        height: 300px;
+        background-color: #ff0004;
+        border-radius: 200px;
+        filter: blur(3.5rem);
+        opacity: 6%;
+    }
+
+    .div-circles {
+        width: 40vw;
+        height: 40vh;
+    }
+
+    .pb {
+        padding-bottom: 480px;
+    }
+
+    #mainDiv {
+        margin-top: 70px;
+    }
 }
 
 .div-cont {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .div-datos {
-  border: 2px solid red;
+    border: 2px solid red;
 }
 
-#div-form-datos{
-  color: #ffffff;
-  width: 500px;
-  height: 325px;
-  z-index: 10;
-  font-family: "Inter", sans-serif;  
+#div-form-datos {
+    color: #ffffff;
+    width: 500px;
+    height: 325px;
+    z-index: 10;
+    font-family: "Inter", sans-serif;
+}
+
+.input-green {
+    background-color: var(--blue);
+}
+
+.input-green:focus {
+    background-color: #c6fff9;
+}
+
+.card {
+    width: 190px;
+    height: 254px;
+    border-radius: 30px;
+    background: var(--black);
+}
+
+.trash-ficha {
+    background-color: red;
+    width: 25px;
+    padding: 4px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.trash-ficha:hover {
+    background-color: rgb(203, 0, 0);
+}
+
+.div-crear {
+    margin-left: 40px;
+}
+
+.div-centro {
+    width: 100%;
+    background-color: var(--blue);
+    color: var(--black);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-option-secundary {
+    width: 100%;
+    height: 60px;
+    border-top: 1px solid #3b3b3b;
+    border-bottom: 1px solid #3b3b3b;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #4e4e4e;
+}
+
+.menu-option-secundary:hover {
+    color: black;
+    background-color: var(--blue);
 }
