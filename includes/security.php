@@ -34,6 +34,11 @@ function login($email, $pass){
         $data = $result->fetch_assoc();
         if(password_verify($pass, $data["contrasena"])){
             $_SESSION["user_id"] = $data["id_usuario"];
+            $id = $_SESSION["user_id"];
+
+            $query = "UPDATE usuario SET last_login = NOW() WHERE id_usuario = $id";
+            $conn->query($query);
+
             return array("success" => true, "message" => "Login correcto");
         } else{
             return array("success" => false, "message" => "Usuario o contraseña incorrectos");

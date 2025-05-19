@@ -31,29 +31,34 @@ $datos = user_info($_SESSION["user_id"]);
             <?php include_once($dir . "/cms/includes/menu-lateral.php") ?>
 
             <div class="main-frame p-4" id="content-frame">
-                <div class="w-100">
+                <div class="d-flex justify-content-center align-items-center w-100 h-100" id="div-loader">
+                    <div>
+                        <?php include_once($dir . "/cms/includes/loader.php") ?>
+                    </div>
+                </div>
+                <div class="w-100 d-none" id="div-content">
                     <div class="d-flex flex-column font1 mt-3 mb-4 ps-4">
                         <div class="d-flex mb-3">
                             <h2>Usuario</h2>
                         </div>
-                        <div class="d-flex flex-column flex-md-row mb-3">
-                            <form class="d-flex flex-row" id="form-user-data">
-                                <div class="d-flex mb-2">
+                        <div class="d-flex mb-3">
+                            <form class="d-flex flex-column flex-md-row" id="form-user-data">
+                                <div class="d-flex mb-3">
                                     <div class="me-4">
                                         <label for="nombre_usuario" class="mb-2">Nombre</label>
                                         <input type="text" id="nombre_usuario" class="form-control" name="inp-nombre-usuario" value="<?= $datos["nombre"] ?>" disabled></input>
                                     </div>
                                 </div>
-                                <div class="d-flex">
+                                <div class="d-flex mb-3">
                                     <div class="me-4">
                                         <label for="email_usuario" class="mb-2">Email</label>
                                         <input type="email" id="email_usuario" class="form-control" name="inp-email-usuario" value="<?= $datos["email"] ?>" disabled></input>
                                     </div>
                                 </div>
-                                <div class="d-flex">
+                                <div class="d-flex mb-3">
                                     <div>
-                                        <label for="pass_usuario" class="mb-2">Contraseña</label>
-                                        <button type="button" id="btn_pass_usuario" class="form-control btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-editar-password"> Cambiar contraseña</button>
+                                        <label for="pass_usuario" class="mb-2">Contraseña</label><br>
+                                        <button type="button" id="btn_pass_usuario" class="form-control btn btn-warning w-btn" data-bs-toggle="modal" data-bs-target="#modal-editar-password"> Cambiar contraseña</button>
                                     </div>
                                 </div>
                             </form>
@@ -87,83 +92,89 @@ $datos = user_info($_SESSION["user_id"]);
                             </div>
                         </div>
                     </div>
-                    <?php if(rol($_SESSION["user_id"]) === 3): ?>
-                    <hr>
-                    <div class="d-flex flex-column font1 mt-3 ps-4">
-                        <div class="d-flex mb-3">
-                            <h2>Centro</h2>
+                    <?php if (rol($_SESSION["user_id"]) === 3): ?>
+                        <hr>
+                        <div class="d-flex flex-column font1 mt-3 ps-4">
+                            <div class="d-flex mb-3">
+                                <h2>Centro</h2>
+                            </div>
+                            <div class="d-flex">
+                                <form class="d-flex flex-column flex-md-row" id="form-center-data">
+                                    <div class="d-flex mb-3">
+                                        <div class="me-4">
+                                            <label for="nombre_centro" class="mb-2">Nombre</label>
+                                            <input type="text" id="nombre_centro" class="form-control" name="inp-nombre-centro" value="<?= $datos["centro"] ?>" disabled></input>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mb-3">
+                                        <div class="me-4">
+                                            <label for="tutor_centro" class="mb-2">Tutor</label>
+                                            <input type="email" id="tutor_centro" class="form-control" name="inp-tutor-centro" value="<?= $datos["tutor_centro"] ?>" disabled></input>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mb-3">
+                                        <div class="me-4">
+                                            <label for="fp" class="mb-2">Ciclo formativo</label>
+                                            <input type="text" id="fp" class="form-control" name="inp-fp" value="<?= $datos["fp"] ?>" disabled></input>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="d-flex flex-column flex-md-row">
-                            <form class="d-flex flex-row" id="form-center-data">
+                        <div class="d-flex flex-column font1 mt-3 ps-4">
+                            <div class="d-flex flex-column flex-md-row">
                                 <div class="d-flex mb-2">
-                                    <div class="me-4">
-                                        <label for="nombre_centro" class="mb-2">Nombre</label>
-                                        <input type="text" id="nombre_centro" class="form-control" name="inp-nombre-centro" value="<?= $datos["centro"] ?>" disabled></input>
+                                    <div class="me-4" id="div-edit-centro">
+                                        <button class="btn btn-primary" id="btn-edit-centro">Editar</button>
                                     </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="me-4">
-                                        <label for="tutor_centro" class="mb-2">Tutor</label>
-                                        <input type="email" id="tutor_centro" class="form-control" name="inp-tutor-centro" value="<?= $datos["tutor_centro"] ?>" disabled></input>
+                                    <div class="me-4 d-none" id="div-accept-centro">
+                                        <button class="btn btn-success" id="btn-accept-centro">Aceptar</button>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-column font1 mt-3 ps-4">
-                        <div class="d-flex flex-column flex-md-row">
-                            <div class="d-flex mb-2">
-                                <div class="me-4" id="div-edit-centro">
-                                    <button class="btn btn-primary" id="btn-edit-centro">Editar</button>
-                                </div>
-                                <div class="me-4 d-none" id="div-accept-centro">
-                                    <button class="btn btn-success" id="btn-accept-centro">Aceptar</button>
-                                </div>
-                                <div class="me-4 d-none" id="div-cancel-centro">
-                                    <button class="btn btn-danger" id="btn-cancel-centro">Cancelar</button>
+                                    <div class="me-4 d-none" id="div-cancel-centro">
+                                        <button class="btn btn-danger" id="btn-cancel-centro">Cancelar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="d-flex flex-column font1 mt-3 ps-4">
-                        <div class="d-flex mb-3">
-                            <h2>Empresa</h2>
+                        <hr>
+                        <div class="d-flex flex-column font1 mt-3 ps-4">
+                            <div class="d-flex mb-3">
+                                <h2>Empresa</h2>
+                            </div>
+                            <div class="d-flex">
+                                <form class="d-flex flex-column flex-md-row" id="form-lab-data">
+                                    <div class="d-flex mb-3">
+                                        <div class="me-4">
+                                            <label for="nombre_lab" class="mb-2">Nombre</label>
+                                            <input type="text" id="nombre_lab" class="form-control" name="inp-nombre-lab" value="<?= $datos["empresa"] ?>" disabled></input>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mb-3">
+                                        <div class="me-4">
+                                            <label for="tutor_lab" class="mb-2">Tutor</label>
+                                            <input type="email" id="tutor_lab" class="form-control" name="inp-tutor-lab" value="<?= $datos["tutor_empresa"] ?>" disabled></input>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="d-flex flex-column flex-md-row">
-                            <form class="d-flex flex-row" id="form-lab-data">
+                        <div class="d-flex flex-column font1 mt-3 ps-4">
+                            <div class="d-flex flex-column flex-md-row">
                                 <div class="d-flex mb-2">
-                                    <div class="me-4">
-                                        <label for="nombre_lab" class="mb-2">Nombre</label>
-                                        <input type="text" id="nombre_lab" class="form-control" name="inp-nombre-lab" value="<?= $datos["empresa"] ?>" disabled></input>
+                                    <div class="me-4" id="div-edit-lab">
+                                        <button class="btn btn-primary" id="btn-edit-lab">Editar</button>
                                     </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="me-4">
-                                        <label for="tutor_lab" class="mb-2">Tutor</label>
-                                        <input type="email" id="tutor_lab" class="form-control" name="inp-tutor-lab" value="<?= $datos["tutor_empresa"] ?>" disabled></input>
+                                    <div class="me-4 d-none" id="div-accept-lab">
+                                        <button class="btn btn-success" id="btn-accept-lab">Aceptar</button>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-column font1 mt-3 ps-4">
-                        <div class="d-flex flex-column flex-md-row">
-                            <div class="d-flex mb-2">
-                                <div class="me-4" id="div-edit-lab">
-                                    <button class="btn btn-primary" id="btn-edit-lab">Editar</button>
-                                </div>
-                                <div class="me-4 d-none" id="div-accept-lab">
-                                    <button class="btn btn-success" id="btn-accept-lab">Aceptar</button>
-                                </div>
-                                <div class="me-4 d-none" id="div-cancel-lab">
-                                    <button class="btn btn-danger" id="btn-cancel-lab">Cancelar</button>
+                                    <div class="me-4 d-none" id="div-cancel-lab">
+                                        <button class="btn btn-danger" id="btn-cancel-lab">Cancelar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
-                <?php endif; ?>
+            <?php endif; ?>
             </div>
         </div>
     </div>
@@ -198,6 +209,13 @@ $datos = user_info($_SESSION["user_id"]);
     <footer>
         <?php include_once($dir . "/cms/includes/footer.php") ?>
     </footer>
+
+    <script>
+        $(window).on("load", function(){
+            $("#div-loader").addClass("d-none");
+            $("#div-content").removeClass("d-none");
+        })
+    </script>
 </body>
 
 </html>

@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
 
     $fecha_inicio_st = $datos[0]["fecha"];
     $fecha_inicio = date("y-m-d", strtotime($fecha_inicio_st . " +0 days"));
-    $fecha_fin = date("Y-m-d", strtotime($fecha_inicio . " +5 days"));
+    $fecha_fin = date("Y-m-d", strtotime($fecha_inicio . " +4 days"));
     
     $fecha_partes = explode("-", $fecha_inicio);
     $fecha_dia = $fecha_partes[2];

@@ -246,6 +246,8 @@ $(document).ready(function () {
         $("#nombre_centro").addClass("input-green");
         $("#tutor_centro").attr("disabled", false);
         $("#tutor_centro").addClass("input-green");
+        $("#fp").attr("disabled", false);
+        $("#fp").addClass("input-green");
         $("#div-edit-centro").addClass("d-none");
         $("#div-accept-centro").removeClass("d-none");
         $("#div-cancel-centro").removeClass("d-none");
@@ -254,6 +256,7 @@ $(document).ready(function () {
     $("#btn-accept-centro").on("click", function () {
         let $nombre = $("#nombre_centro").val();
         let $tutor = $("#tutor_centro").val();
+        let $fp = $("#fp").val();
 
         if ($nombre.length == 0) {
             Swal.fire({
@@ -269,6 +272,15 @@ $(document).ready(function () {
                 icon: "error",
                 title: "Campos incompletos",
                 text: "Por favor rellene el campo tutor",
+            });
+            return;
+        }
+
+        if ($fp.length == 0) {
+            Swal.fire({
+                icon: "error",
+                title: "Campos incompletos",
+                text: "Por favor rellene el campo ciclo formativo",
             });
             return;
         }
@@ -294,14 +306,16 @@ $(document).ready(function () {
                     $("#tutor_centro").attr("disabled", true);
                     $("#tutor_centro").val($tutor);
                     $("#tutor_centro").removeClass("input-green");
+                    $("#fp").attr("disabled", true);
+                    $("#fp").val($fp);
+                    $("#fp").removeClass("input-green");
                     $("#div-edit-centro").removeClass("d-none");
                     $("#div-accept-centro").addClass("d-none");
                     $("#div-cancel-centro").addClass("d-none");
                 } else {
                     Swal.fire({
                         icon: "error",
-                        title: "Campos incompletos",
-                        text: res.message,
+                        title: res.message,
                     });
                 }
             },
@@ -315,6 +329,9 @@ $(document).ready(function () {
         $("#tutor_centro").attr("disabled", true);
         $("#tutor_centro").val($email);
         $("#tutor_centro").removeClass("input-green");
+        $("#fp").attr("disabled", true);
+        $("#fp").val($fp);
+        $("#fp").removeClass("input-green");
         $("#div-edit-centro").removeClass("d-none");
         $("#div-accept-centro").addClass("d-none");
         $("#div-cancel-centro").addClass("d-none");

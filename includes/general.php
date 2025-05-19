@@ -165,6 +165,11 @@ function fecha_normal($fecha){
     return $fecha_new;
 }
 
+function fecha_normal_hora($fecha){
+    $fecha_mod = date("d/m/Y H:i:s", strtotime($fecha));
+    return $fecha_mod;
+}
+
 /**
  * Hace la suma de todas las horas de la semana seleccionada y devuelve las horas totales
  * @param id - Int - ID de la ficha
@@ -287,8 +292,8 @@ function get_all_sheets_filter($id){
     $query = "SELECT *
     FROM ficha f
     WHERE id_alumno = ?
-    ORDER BY fecha_creacion ASC
-    LIMIT 3";
+    ORDER BY fecha_creacion DESC
+    LIMIT 4";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -319,7 +324,7 @@ function get_all_users(){
     INNER JOIN rol r ON u.rol_id = r.id_rol
     INNER JOIN centro c ON u.id_centro = c.id_centro
     INNER JOIN empresa e ON u.id_empresa = e.id_empresa
-    WHERE u.id_usuario != 6
+    WHERE u.id_usuario != 1
     AND u.alta = 1
     ORDER BY nombre ASC";
     $stmt = $conn->query($query);
@@ -343,7 +348,7 @@ function get_all_users_nr(){
     r.nombre as nombre_rol
     FROM usuario u
     INNER JOIN rol r ON u.rol_id = r.id_rol
-    WHERE u.id_usuario != 6
+    WHERE u.id_usuario != 1
     AND u.alta = 0
     ORDER BY u.nombre ASC";
     $stmt = $conn->query($query);
@@ -375,4 +380,31 @@ function get_all_rols(){
     }
 
     return $roles;
+}
+
+/**
+ * Devuelve los último usuario logueados
+ * @return array - Devuelve un array con los datos de los usuarios
+ */
+function last_login_users_list(){
+    global $conn;
+
+    $query = "SELECT u.nombre, u.email, u.last_login,
+        (SELECT nombre FROM centro c WHERE u.id_centro = c.id_centro) AS centro,
+        (SELECT nombre FROM empresa e WHERE u.id_empresa = e.id_empresa) AS empresa
+        FROM usuario u 
+        WHERE u.id_usuario != 1
+        ORDER BY u.last_login DESC
+        LIMIT 6";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    $users = [];
+
+    while($user = $result->fetch_assoc()){
+        $users[] = $user;
+    }
+
+    return $users;
 }
