@@ -4,7 +4,10 @@ $dir = $_SERVER["DOCUMENT_ROOT"];
 
 include_once($dir . "/includes/general.php");
 include_once($dir . "/cms/includes/showErrors.php");
-include_once($dir . "/cms/includes/checkeo.php");
+
+if(!isLogged()){
+    header("LOCATION: /login");
+}
 
 // Formulario de bienvenida donde el usuario debe de rellenar los datos solicitados
 ?>
