@@ -16,8 +16,8 @@ function isLogged(){
 
 /**
  * Revisa si los campos de usuario y contraseña son correctos
- * @param email - string
- * @param pass - string
+ * @param string $email
+ * @param string $pass
  * @return boolean
  */
 function login($email, $pass){
@@ -26,9 +26,13 @@ function login($email, $pass){
     $query = "SELECT * FROM usuario WHERE email = ?";
 
     $stmt = $conn -> prepare($query);
+    if(!$stmt){
+        return array("success" => false, "message" => "Error interno, inténtelo de nuevo más tarde");
+    }
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
+    $stmt->close();
 
     if(mysqli_num_rows($result) > 0){
         $data = $result->fetch_assoc();
@@ -36,8 +40,14 @@ function login($email, $pass){
             $_SESSION["user_id"] = $data["id_usuario"];
             $id = $_SESSION["user_id"];
 
-            $query = "UPDATE usuario SET last_login = NOW() WHERE id_usuario = $id";
-            $conn->query($query);
+            $query = "UPDATE usuario SET last_login = NOW() WHERE id_usuario = ?";
+            $stmt = $conn->prepare($query);
+            if(!$stmt){
+                return array("success" => false, "message" => "Error interno, inténtelo de nuevo más tarde");
+            }
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $stmt->close();
 
             return array("success" => true, "message" => "Login correcto");
         } else{
@@ -48,6 +58,9 @@ function login($email, $pass){
     }
 }
 
+/**
+ * Destruye la sesión actual
+ */
 function logOut(){
     session_unset();
     session_destroy();

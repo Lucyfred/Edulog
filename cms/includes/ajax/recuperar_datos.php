@@ -6,6 +6,7 @@ require_once($dir . "/includes/general.php");
 require_once($dir . "/vendor/autoload.php");
 include_once($dir . "/cms/includes/showErrors.php");
 
+// Recupera los datos de la ficha para poder editarlos
 
 header("Content-Type: application/json");
 

@@ -13,6 +13,7 @@ RewriteRule ^fichas$ cms/fichas.php [L]
 RewriteRule ^usuariosSR$ cms/users.php [L]
 RewriteRule ^usuariosNR$ cms/users_not.php [L]
 RewriteRule ^ajustes$ cms/settings.php [L]
+RewriteRule ^2fa$ cms/2fa.php [L]
 
 <FilesMatch "\.(jpg|jpeg|png|gif)$">
     #SetEnvIf Referer "^http://192\.168\.1\.130" allow_from_local

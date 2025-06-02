@@ -2,6 +2,7 @@ let urlLocation = window.location.pathname;
 let domain = window.location.protocol + "//" + window.location.hostname;
 
 $(document).ready(function () {
+
     /**
      * Animaciones de los círculos en la pantalla de login
      */
@@ -49,16 +50,6 @@ $(document).ready(function () {
         purpleCircle();
         blueCircle();
     }
-
-    // $("#home").click(function(){
-    //   $("#content-frame").load("../../main.php");
-    //   history.pushState({}, "", "/")
-    // });
-
-    // $("#files").click(function(){
-    //   $("#content-frame").load("../../fichas.php");
-    //   history.pushState({}, "", "/fichas")
-    // });
 
     /**
      * Revisión de datos al hacer login
@@ -108,16 +99,26 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * Revisa si el formato del email es válido
+ * @param {string} email - Email a revisar
+ * @returns 
+ */
 function emailCheck(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 }
 
 $(document).ready(function () {
+    /**
+     * Maneja el evento de cambio en el input de archivo
+     * - Obtiene el archivo
+     * - Crea un formdata y lo envía al ajax
+     * - Si es correcto, la imagen se actualiza
+     */
     $("#avatar-file").on("change", function () {
         let file = this.files[0];
         let $url = $("#avatar").attr("src");
-        let $urlMod = $url.replace("avatar-settings", "avatar" + $("#id_user").val());
 
         if (!file) {
             return;
@@ -132,22 +133,33 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             data: formData,
+            /**
+             * Si es correcto, cambiar la url de las fotos, haciéndolas únicas
+             * @param {{ code: string, url: string, message: string}} res 
+             */
             success: function (res) {
                 if (res.code === "200") {
                     $url = domain + res.url;
                     $("#avatar").attr("src", $url.split("?")[0] + "?v=" + new Date().getTime());
                     $("#avatar-sm").attr("src", $url.split("?")[0] + "?v=" + new Date().getTime());
+                } else{
+                    Swal.fire({
+                        icon: "error",
+                        title: res.message,
+                    });
                 }
             },
         });
     });
-    const avatar = document.getElementById("avatar-file").files[0];
 });
 
 $(document).ready(function () {
     let $name = $("#nombre_usuario").val();
     let $email = $("#email_usuario").val();
 
+    /**
+     * Evento de escucha, al dar click modifica las clases y atributos de algunos elementos
+     */
     $("#btn-edit-user").on("click", function () {
         $("#nombre_usuario").attr("disabled", false);
         $("#nombre_usuario").addClass("input-green");
@@ -158,6 +170,9 @@ $(document).ready(function () {
         $("#div-cancel-user").removeClass("d-none");
     });
 
+    /**
+     * Evento de escucha, al dar click revisa varios datos y manda un ajax
+     */
     $("#btn-accept-user").on("click", function () {
         let $nombre = $("#nombre_usuario").val();
         let $email = $("#email_usuario").val();
@@ -189,10 +204,15 @@ $(document).ready(function () {
             return;
         }
 
+
         $.ajax({
             url: "/cms/includes/ajax/update_user_data.php",
             method: "POST",
             data: $("#form-user-data").serialize(),
+            /**
+             * Si es correcto, modifica los datos y deshabilita los inputs
+             * @param {{ message: string, code: string }} res 
+             */
             success: function (res) {
                 if (res.code === "200") {
                     Swal.fire({
@@ -224,6 +244,9 @@ $(document).ready(function () {
         });
     });
 
+    /**
+     * Evento de escucha, al dar click modifica las clases y atributos de algunos elementos
+     */
     $("#btn-cancel-user").on("click", function () {
         $("#nombre_usuario").attr("disabled", true);
         $("#nombre_usuario").val($name);
@@ -241,6 +264,9 @@ $(document).ready(function () {
     let $name = $("#nombre_centro").val();
     let $email = $("#tutor_centro").val();
 
+    /**
+     * Evento de escucha, al dar click modifica las clases y atributos de algunos elementos
+     */
     $("#btn-edit-centro").on("click", function () {
         $("#nombre_centro").attr("disabled", false);
         $("#nombre_centro").addClass("input-green");
@@ -253,6 +279,9 @@ $(document).ready(function () {
         $("#div-cancel-centro").removeClass("d-none");
     });
 
+    /**
+     * Evento de escucha, al dar click revisa los datos y realiza un ajax
+     */
     $("#btn-accept-centro").on("click", function () {
         let $nombre = $("#nombre_centro").val();
         let $tutor = $("#tutor_centro").val();
@@ -289,6 +318,11 @@ $(document).ready(function () {
             url: "/cms/includes/ajax/update_center_data.php",
             method: "POST",
             data: $("#form-center-data").serialize(),
+            /**
+             * Si es correcto, mostrará el mensaje y modificará las clases y atributos de algunos elementos
+             * Si no, dará el error
+             * @param {{ message: string, code: string }} res 
+             */
             success: function (res) {
                 if (res.code === "200") {
                     Swal.fire({
@@ -322,6 +356,9 @@ $(document).ready(function () {
         });
     });
 
+    /**
+     * Evento de escucha, al dar click modifica las clases y atributos de algunos elementos
+     */
     $("#btn-cancel-centro").on("click", function () {
         $("#nombre_centro").attr("disabled", true);
         $("#nombre_centro").val($name);
@@ -342,6 +379,9 @@ $(document).ready(function () {
     let $name = $("#nombre_lab").val();
     let $tutor = $("#tutor_lab").val();
 
+    /**
+     * Evento de escucha, al dar click modifica las clases y atributos de algunos elementos
+     */
     $("#btn-edit-lab").on("click", function () {
         $("#nombre_lab").attr("disabled", false);
         $("#nombre_lab").addClass("input-green");
@@ -352,6 +392,9 @@ $(document).ready(function () {
         $("#div-cancel-lab").removeClass("d-none");
     });
 
+    /**
+     * Evento de escucha, al dar click revisa los datos y realiza un ajax
+     */
     $("#btn-accept-lab").on("click", function () {
         let $nombre = $("#nombre_lab").val();
         let $tutor = $("#tutor_lab").val();
@@ -378,6 +421,11 @@ $(document).ready(function () {
             url: "/cms/includes/ajax/update_lab_data.php",
             method: "POST",
             data: $("#form-lab-data").serialize(),
+            /**
+             * Si es correcto, muestra un mensaje y modifica las clases y atributos de algunos elementos
+             * Si no, muestra el error
+             * @param {{ message: string, code: string }} res 
+             */
             success: function (res) {
                 if (res.code === "200") {
                     Swal.fire({
@@ -409,6 +457,9 @@ $(document).ready(function () {
         });
     });
 
+    /**
+     * Evento de escucha, al dar click modifica las clases y atributos de algunos elementos
+     */
     $("#btn-cancel-lab").on("click", function () {
         $("#nombre_lab").attr("disabled", true);
         $("#nombre_lab").val($name);
@@ -422,16 +473,23 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * Convierte la fecha del formato que usa SQL a formato europeo
+ * @param {string} fecha 
+ * @returns {string} fecha modificada
+ */
 function fechaNormal(fecha) {
     const partes = fecha.split("-");
-    if (partes.length !== 3) return fecha; // protección simple
+    if (partes.length !== 3) return fecha;
     return `${partes[2]}/${partes[1]}/${partes[0]}`;
 }
 
 $(document).ready(function () {
-    const $fechaInput = $("#fecha");
 
-    $fechaInput.on("change", function () {
+    /**
+     * Evento de escucha, al dar click revisa la fecha seleccionada, si no es lunes, dará error
+     */
+    $("#fecha").on("change", function () {
         const date = new Date(this.value);
         const day = date.getDay();
 
@@ -448,6 +506,9 @@ $(document).ready(function () {
         }
     });
 
+    /**
+     * Evento de escucha, al dar click revisa los valores y manda un ajax
+     */
     $("#btn-create").on("click", function () {
         let $fecha = $("#fecha").val();
         let $semana = $("#num_semana").val();
@@ -480,9 +541,14 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: "/cms/includes/crear_ficha_semana.php",
+            url: "/cms/includes/ajax/crear_ficha_semana.php",
             method: "POST",
             data: $("#form-create").serialize(),
+            /**
+             * Si es correcto, guarda el mensaje en la sessionStorage, recarga la web y mostrará el mensaje
+             * Si no, dará error
+             * @param {{ message: string, code: string }} res 
+             */
             success: function (res) {
                 if (res.code === "200") {
                     sessionStorage.setItem("swalMessage", res.message);
@@ -503,6 +569,9 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * Evento de escucha, al dar click revisa los valores y manda un ajax
+ */
 $(document).on("click", ".trash-ficha", function () {
     let $id = $(this).closest(".card").find(".f-id").val();
 
@@ -522,9 +591,14 @@ $(document).on("click", ".trash-ficha", function () {
 
     if (confirmacion) {
         $.ajax({
-            url: "/cms/includes/func/borrar_ficha.php",
+            url: "/cms/includes/ajax/borrar_ficha.php",
             method: "POST",
             data: { id: $id },
+            /**
+             * Si es correcto, guarda el mensaje en la sessionStorage, recarga la web y mostrará el mensaje
+             * Si no, dará error
+             * @param {{ message: string, code: string }} res 
+             */
             success: function (res) {
                 if (res.code === "200") {
                     sessionStorage.setItem("swalMessage", res.message);
@@ -545,6 +619,9 @@ $(document).on("click", ".trash-ficha", function () {
     }
 });
 
+/**
+ * Evento de escucha, al dar click revisa los valores y manda un ajax
+ */
 $(document).on("click", ".edit-ficha", function () {
     let $id = $(this).closest(".card").find(".f-id").val();
 
@@ -561,9 +638,13 @@ $(document).on("click", ".edit-ficha", function () {
     }
 
     $.ajax({
-        url: "/cms/includes/func/recuperar_datos.php",
+        url: "/cms/includes/ajax/recuperar_datos.php",
         method: "POST",
         data: { id: $id },
+        /**
+         * Si es correcto, recorrerá todo el array mostrando los datos
+         * @param {Array} res 
+         */
         success: function (res) {
             res.forEach((element) => {
                 let dia = element.dia;
@@ -575,11 +656,17 @@ $(document).on("click", ".edit-ficha", function () {
     });
 });
 
+/**
+ * Evento de escucha, cuando se oculte el modal, reseteará el formulario y eliminará el elemento con clase id_edit
+ */
 $("#modal-editar").on("hidden.bs.modal", function () {
     $(this).find("#form-editar")[0].reset();
     $(this).find(".id-edit").remove();
 });
 
+/**
+ * Evento de escucha, al dar click revisa los valores y manda un ajax
+ */
 $(document).on("click", "#btn-save", function () {
     let $id = $(this).closest("#form-editar").find(".mf-id").val();
     let $actLunes = $("#textarea-lunes").val();
@@ -636,9 +723,14 @@ $(document).on("click", "#btn-save", function () {
     }
 
     $.ajax({
-        url: "/cms/includes/func/guardar_datos_ficha.php",
+        url: "/cms/includes/ajax/guardar_datos_ficha.php",
         method: "POST",
         data: $("#form-editar").serialize() + "&id=" + $id,
+        /**
+         * Si es correcto, guarda el mensaje en la sessionStorage, recarga la web y mostrará el mensaje
+         * Si no, dará error
+         * @param {{ message: string, code: string }} res 
+         */
         success: function (res) {
             if (res.code === "200") {
                 sessionStorage.setItem("swalMessage", res.message);
@@ -658,6 +750,9 @@ $(document).on("click", "#btn-save", function () {
     });
 });
 
+/**
+ * Cuando carga la web, revisa si hay mensajes en el sessionStorage, si es así los muestra y luego los elimina
+ */
 $(document).ready(function () {
     const message = sessionStorage.getItem("swalMessage");
     const type = sessionStorage.getItem("swalType");
@@ -677,6 +772,9 @@ $(document).ready(function () {
     }
 });
 
+/**
+ * Evento de escucha, al dar click obtiene el id y abre una pestaña nueva con el pdf de la ficha
+ */
 $(document).on("click", ".btn-imprimir", function () {
     let $id = $(this).closest(".card").find(".f-id").val();
     const url = `/cms/includes/generar_ficha.php?fi=${$id}`;
@@ -684,10 +782,16 @@ $(document).on("click", ".btn-imprimir", function () {
 });
 
 $(document).ready(function () {
+    /**
+     * Evento de escucha, al mostrar el modal, hace focus en el campo de pass
+     */
     $("#modal-editar-password").on("shown.bs.modal", function(){
         $("#pass").focus();
     })
 
+    /**
+     * Evento de escucha, al dar enter pasa al siguiente campo
+     */
     $("#pass").on("keydown", function(e){
         if(e.key === "Enter"){
             e.preventDefault();
@@ -695,6 +799,9 @@ $(document).ready(function () {
         }
     })
 
+    /**
+     * Evento de escucha, al dar enter hace click en el botón de aceptar
+     */
     $("#pass2").on("keydown", function(e){
         if(e.key === "Enter"){
             e.preventDefault();
@@ -702,6 +809,9 @@ $(document).ready(function () {
         }
     })
 
+    /**
+     * Evento de escucha, al dar click en el botón revisa los valores y manda un ajax
+     */
     $("#btn-edit-password").on("click", function () {
         let $pass = $("#pass").val();
         let $pass2 = $("#pass2").val();
@@ -731,11 +841,16 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: "/cms/includes/func/edit_pass.php",
+            url: "/cms/includes/ajax/edit_pass.php",
             method: "POST",
             data: {
                 pass: $pass,
             },
+            /**
+             * Si es correcto, guarda el mensaje en la sessionStorage, recarga la web y mostrará el mensaje
+             * Si no, dará error
+             * @param {{ message: string, code: string }} res 
+             */
             success: function (res) {
                 if (res.code === "200") {
                     sessionStorage.setItem("swalMessage", res.message);
@@ -757,6 +872,9 @@ $(document).ready(function () {
 });
 
 $(document).ready(function(){
+    /**
+     * Evento de escucha, al dar click modifica la clase del elemento
+     */
     $("#usuarios").on("click", function(e){
         e.preventDefault();
         const $submenu = $("#menu-usuarios");

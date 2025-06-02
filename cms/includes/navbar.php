@@ -1,5 +1,7 @@
 <?php
 
+// Barra de navegación superior con el logo, avatar y menú
+
 $logOut = $url_site . "/login";
 
 echo <<<HTML

@@ -2,16 +2,15 @@
 
 $dir = $_SERVER["DOCUMENT_ROOT"];
 
-// session_start();
-
 include_once($dir . "/includes/general.php");
 include_once($dir . "/includes/security.php");
 include_once($dir . "/cms/includes/checkeo.php");
 include_once($dir . "/cms/includes/showErrors.php");
 
-
+// Obtenemos los datos del usuario logueado
 $datos = user_info($_SESSION["user_id"]);
 
+// Página de ajustes, donde se verán los datos del alumno o administrador
 ?>
 
 <!DOCTYPE html>
@@ -211,6 +210,9 @@ $datos = user_info($_SESSION["user_id"]);
     </footer>
 
     <script>
+        /**
+         * Evento de carga, al cargar la web, oculta el loader y muestra la web
+         */
         $(window).on("load", function(){
             $("#div-loader").addClass("d-none");
             $("#div-content").removeClass("d-none");

@@ -1,6 +1,6 @@
 <?php
 
-use Dom\HTMLElement;
+// Menú lateral el cual recoge la información de la URL para dejar activa la opción
 
 $url = $_SERVER['REQUEST_URI'];
 

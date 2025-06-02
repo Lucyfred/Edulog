@@ -6,6 +6,7 @@ require_once($dir . "/includes/general.php");
 require_once($dir . "/vendor/autoload.php");
 include_once($dir . "/cms/includes/showErrors.php");
 
+// Guarda los datos que haya introducido el usuario en el formulario para la ficha
 
 header("Content-Type: application/json");
 

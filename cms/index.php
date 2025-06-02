@@ -7,6 +7,7 @@ include_once($dir . "/includes/security.php");
 include_once($dir . "/cms/includes/checkeo.php");
 include_once($dir . "/cms/includes/showErrors.php");
 
+// Ejecutamos las funciones según el rol del usuario
 if (rol($_SESSION["user_id"]) === 3) {
     $fichas = get_all_sheets_filter($_SESSION["user_id"]);
 }
@@ -14,6 +15,9 @@ if (rol($_SESSION["user_id"]) === 3) {
 if (rol($_SESSION["user_id"]) === 1) {
     $last_login = last_login_users_list();
 }
+
+// Index, donde se mostrará la página principal para el alumno se mostrará sus últimas fichas
+// y para el administrador se mostrarán los últimos últimos 6 login de los alumnos
 ?>
 
 <!DOCTYPE html>
@@ -96,11 +100,88 @@ if (rol($_SESSION["user_id"]) === 1) {
         </div>
     </div>
 
+    <!-- Modal editar -->
+    <div class="modal fade" id="modal-editar" tabindex="-1" aria-labelledby="modalEditar" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-black" id="modalEditar">Editar ficha semanal</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form id="form-editar" method="POST">
+                            <div class="row">
+                                <div class="col-9">
+                                    <label class="form-label text-black" for="fecha">Actividad lunes:</label>
+                                    <textarea class="form-control" rows="3" name="act-lunes" id="textarea-lunes"></textarea>
+                                </div>
+                                <div class="col-3">
+                                    <label class="form-label text-black" for="fecha">Horas:</label>
+                                    <input type="number" class="form-control" name="h-lunes" id="horas-lunes"></input>
+                                </div>
+                            </div>
+                            <hr class="text-black">
+                            <div class="row">
+                                <div class="col-9">
+                                    <label class="form-label text-black" for="fecha">Actividad martes:</label>
+                                    <textarea class="form-control" rows="3" name="act-martes" id="textarea-martes"></textarea>
+                                </div>
+                                <div class="col-3">
+                                    <label class="form-label text-black" for="fecha">Horas:</label>
+                                    <input type="number" class="form-control" name="h-martes" id="horas-martes"></input>
+                                </div>
+                            </div>
+                            <hr class="text-black">
+                            <div class="row">
+                                <div class="col-9">
+                                    <label class="form-label text-black" for="fecha">Actividad miércoles:</label>
+                                    <textarea class="form-control" rows="3" name="act-miercoles" id="textarea-miercoles"></textarea>
+                                </div>
+                                <div class="col-3">
+                                    <label class="form-label text-black" for="fecha">Horas:</label>
+                                    <input type="number" class="form-control" name="h-miercoles" id="horas-miercoles"></input>
+                                </div>
+                            </div>
+                            <hr class="text-black">
+                            <div class="row">
+                                <div class="col-9">
+                                    <label class="form-label text-black" for="fecha">Actividad jueves:</label>
+                                    <textarea class="form-control" rows="3" name="act-jueves" id="textarea-jueves"></textarea>
+                                </div>
+                                <div class="col-3">
+                                    <label class="form-label text-black" for="fecha">Horas:</label>
+                                    <input type="number" class="form-control" name="h-jueves" id="horas-jueves"></input>
+                                </div>
+                            </div>
+                            <hr class="text-black">
+                            <div class="row">
+                                <div class="col-9">
+                                    <label class="form-label text-black" for="fecha">Actividad viernes:</label>
+                                    <textarea class="form-control" rows="3" name="act-viernes" id="textarea-viernes"></textarea>
+                                </div>
+                                <div class="col-3">
+                                    <label class="form-label text-black" for="fecha">Horas:</label>
+                                    <input type="number" class="form-control" name="h-viernes" id="horas-viernes"></input>
+                                </div>
+                            </div>
+                            <br>
+                            <button type="button" class="btn btn-success" id="btn-save">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <?php include_once($dir . "/cms/includes/footer.php") ?>
     </footer>
 
     <script>
+        /**
+         * Evento de carga, al cargar la web, oculta el loader y muestra la web
+         */
         $(window).on("load", function() {
             $("#div-loader").addClass("d-none");
             $("#div-content").removeClass("d-none");

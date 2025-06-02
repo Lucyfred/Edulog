@@ -6,6 +6,7 @@ require_once($dir . "/includes/general.php");
 require_once($dir . "/vendor/autoload.php");
 include_once($dir . "/cms/includes/showErrors.php");
 
+// Cambia la contraseña del usuario seleccionado, esta opción solamente es para los administradores
 
 header("Content-Type: application/json");
 

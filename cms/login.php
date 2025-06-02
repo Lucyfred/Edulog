@@ -4,8 +4,10 @@ $dir = $_SERVER["DOCUMENT_ROOT"];
 
 include_once($dir . "/includes/security.php");
 
+// Al ir a la página de login, se destruye la sesión anterior
 logOut();
 
+// Página de login donde el administrado o alumno iniciarán sesión
 ?>
 
 <!DOCTYPE html>

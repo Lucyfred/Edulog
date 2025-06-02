@@ -5,6 +5,7 @@ $dir = $_SERVER["DOCUMENT_ROOT"];
 include_once($dir . "/includes/general.php");
 include_once($dir . "/cms/includes/checkeo.php");
 
+// Módulo donde el alumno podrá hacer CRUD de sus fichas semanales
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +50,7 @@ include_once($dir . "/cms/includes/checkeo.php");
                                         <div class="d-flex flex-column alert">
                                             <h3 class="ms-4 mb-4"><?= $alumno["nombre"] ?></h3>
                                             <div class="d-flex flex-wrap flex-md-row flex-column">
-                                                <?php $fichas = get_all_sheets($alumno["id_usuario"]) ?>
+                                                <?php $fichas = get_fichas($alumno["id_usuario"]) ?>
                                                 <?php if (count($fichas) > 0) { ?>
                                                     <?php foreach ($fichas as $ficha): ?>
                                                         <?php include($dir . "/cms/includes/card_ficha_admin.php") ?>
@@ -201,6 +202,9 @@ include_once($dir . "/cms/includes/checkeo.php");
 
     <?php if (rol($_SESSION["user_id"]) === 1): ?>
         <script>
+            /**
+             * Evento de escucha, al dar click obtiene el id y abre una pestaña nueva con el pdf de la ficha
+             */
             $(document).on("click", ".btn-imprimir-admin", function() {
                 let $id = $(this).closest(".card").find(".f-id").val();
                 let $idAlumno = $(this).closest(".card").find(".a-id").val();
@@ -211,6 +215,9 @@ include_once($dir . "/cms/includes/checkeo.php");
     <?php endif; ?>
 
     <script>
+        /**
+         * Evento de carga, al cargar la web, oculta el loader y muestra la web
+         */
         $(window).on("load", function() {
             $("#div-loader").addClass("d-none");
             $("#div-content").removeClass("d-none");

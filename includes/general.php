@@ -9,7 +9,7 @@ $url_site = $protocolo . "://" . $dominio;
 
 /**
  * Revisa si el usuario es admin
- * @param id - Int - ID del usuario
+ * @param int $id ID del usuario
  * @return bool - Devuelve un booleano
  */
 function is_admin($id){
@@ -34,7 +34,7 @@ function is_admin($id){
 
 /**
  * Revisa si el usuario hizo el primer login
- * @param id - Int - ID del usuario
+ * @param int $id ID del usuario
  * @return bool - Devuelve un booleano
  */
 function first_login($id){
@@ -55,7 +55,7 @@ function first_login($id){
 
 /**
  * Devuelve todos los datos del usuario a través de su ID
- * @param id - Int - ID del usuario
+ * @param int $id ID del usuario
  * @return array - Devuelve un array con los datos del usuario
  */
 function user_info($id){
@@ -79,8 +79,8 @@ function user_info($id){
 
 /**
  * Revisa si existe un avatar en el usuario
- * @param id - int - ID del usuario
- * @return boolean
+ * @param int $id ID del usuario
+ * @return bool - Devuelve un booleano
  */
 function check_avatar($id){
     global $conn;
@@ -109,7 +109,7 @@ function check_avatar($id){
 
 /**
  * Obtiene todos los datos del usuario
- * @param id - Int - ID del usuario
+ * @param int $id ID del usuario
  * @return array - Devuelve un array con todos los datos
  */
 function get_student_data($id){
@@ -139,7 +139,7 @@ function get_student_data($id){
 
 /**
  * Obtiene todas las fichas del alumno
- * @param id - Int - ID del alumno
+ * @param int $id ID del alumno
  * @return array - Devuelve un array con las fichas
  */
 function get_fichas($id){
@@ -172,8 +172,8 @@ function fecha_normal_hora($fecha){
 
 /**
  * Hace la suma de todas las horas de la semana seleccionada y devuelve las horas totales
- * @param id - Int - ID de la ficha
- * @return Int - Retorna la cantidad de horas
+ * @param int $id ID de la ficha
+ * @return int - Retorna la cantidad de horas
  */
 function get_horas_semana($id){
     global $conn;
@@ -194,7 +194,7 @@ function get_horas_semana($id){
 
 /**
  * Revisa el rol del usuario
- * @param id - Int - ID del usuario
+ * @param int $id ID del usuario
  * @return int - Retorna el id del rol
  */
 function rol($id){
@@ -232,7 +232,7 @@ function get_all_schools(){
 
 /**
  * Devuelve todos los alumnos según el centro
- * @param centro - Int - ID del centro
+ * @param int $centro ID del centro
  * @return array - Array con todas las fichas
  */
 function get_all_students($centro){
@@ -257,33 +257,8 @@ function get_all_students($centro){
 }
 
 /**
- * Devuelve todas las fichas para el usuario administrador
- * @param id - Int -ID del alumno
- * @return array - Array con todas las fichas
- */
-function get_all_sheets($id){
-    global $conn;
-
-    $query = "SELECT *
-    FROM ficha f
-    WHERE id_alumno = ?
-    ORDER BY semana ASC";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $fichas = [];
-
-    while($ficha = $result->fetch_assoc()){
-        $fichas[] = $ficha;
-    }
-
-    return $fichas;
-}
-
-/**
  * Devuelve todas las fichas según filtro
- * @param id - Int -ID del alumno
+ * @param int $id ID del alumno
  * @return array - Array con todas las fichas
  */
 function get_all_sheets_filter($id){
@@ -309,7 +284,7 @@ function get_all_sheets_filter($id){
 
 /**
  * Devuelve todos los usuarios
- * @param centro - Int - ID del centro
+ * @param int $centro ID del centro
  * @return array - Array con todas las fichas
  */
 function get_all_users(){
@@ -362,9 +337,8 @@ function get_all_users_nr(){
 }
 
 /**
- * Devuelve todos roles
- * @param centro - Int - ID del centro
- * @return array - Array con todas las fichas
+ * Devuelve todos los roles
+ * @return array - Array con todos los roles
  */
 function get_all_rols(){
     global $conn;
@@ -383,7 +357,7 @@ function get_all_rols(){
 }
 
 /**
- * Devuelve los último usuario logueados
+ * Devuelve los últimos usuarios logueados
  * @return array - Devuelve un array con los datos de los usuarios
  */
 function last_login_users_list(){
@@ -394,6 +368,7 @@ function last_login_users_list(){
         (SELECT nombre FROM empresa e WHERE u.id_empresa = e.id_empresa) AS empresa
         FROM usuario u 
         WHERE u.id_usuario != 1
+        AND alta = 1
         ORDER BY u.last_login DESC
         LIMIT 6";
     $stmt = $conn->prepare($query);

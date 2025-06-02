@@ -6,13 +6,16 @@ require_once($dir . "/includes/general.php");
 require_once($dir . "/vendor/autoload.php");
 include_once($dir . "/cms/includes/showErrors.php");
 
+// Genera un PDF de la ficha seleccionada, siendo solamente la del alumno, no puede acceder a fichas de otro alumnos
 
+// Se usa la librería de Fpdi
 use setasign\Fpdi\Fpdi;
 
 if($_SERVER["REQUEST_METHOD"] === "GET"){
     global $conn;
     $alumno = get_student_data($_SESSION["user_id"]);
     $id_alumno = $alumno["id_usuario"];
+    // Obtenemos los datos de la URL
     $id_ficha = $_GET["fi"];
 
     $query = "SELECT *,
@@ -31,6 +34,7 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
         $datos[] = $dato;
     }
 
+    // Si no encuentra datos lo redirige al 404
     if(count($datos) == 0){
         header("LOCATION: /cms/includes/404.html");
     }
@@ -91,12 +95,15 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
             break;
     }
     
+    // Se genera el PDF con la ficha por defecto
     $pdf = new Fpdi();
     $pdf->AddPage("horizontal");
     $pdf->SetSourceFile($dir . "/cms/uploads/default/ficha/fichasemanal.pdf");
     $templateId = $pdf->importPage(1);
     $pdf->useTemplate($templateId);
     
+    // Se configura la fuente y se comienza a rellenar la ficha con las coordenadas del PDF
+    // Uso de mb_convert_encoding para poder convertir la codificación y ver las tildes
     $pdf->SetFont("Arial", "", 9);
     // Posición del dia de inicio
     $pdf->SetXY(55, 35.5);

@@ -4,15 +4,9 @@ $dir = $_SERVER["DOCUMENT_ROOT"];
 
 include_once($dir . "/includes/general.php");
 include_once($dir . "/cms/includes/showErrors.php");
+include_once($dir . "/cms/includes/checkeo.php");
 
-if (!isLogged()) {
-    header("LOCATION: login");
-}
-
-if (first_login($_SESSION["user_id"]) !== 0) {
-    header("LOCATION: index");
-}
-
+// Formulario de bienvenida donde el usuario debe de rellenar los datos solicitados
 ?>
 
 <!DOCTYPE html>
@@ -76,11 +70,17 @@ if (first_login($_SESSION["user_id"]) !== 0) {
         <?php include_once($dir . "/cms/includes/footer.php") ?>
     </footer>
     <script>
+        /**
+         * Al cargar la web hace focus en el campo nombre
+         */
         window.onload = () => {
             document.getElementById("nombre").focus();
         };
 
         $(document).ready(function(){
+            /**
+             * Evento de escucha, al dar click revisa los valores y manda un ajax
+             */
             $("#submitDatos").click( function(e){
                 let $nombre = $("#nombre").val();
                 let $apellidos = $("#apellidos").val();
@@ -197,6 +197,11 @@ if (first_login($_SESSION["user_id"]) !== 0) {
                     url: "<?= $url_site ?>" + "/cms/includes/ajax/update_datos.php",
                     method: "POST",
                     data: $("#form-datos").serialize(),
+                    /**
+                     * Si es correcto, redirije al index
+                     * Si no, mostrará un error
+                     * @param {{ message: string, success: string, redirect: string }} res 
+                     */
                     success: function(res){
                         if(res.success == "false"){
                             $("#alert").remove();

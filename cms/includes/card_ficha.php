@@ -1,5 +1,7 @@
 <?php
 
+// Genera una card con la ficha del usuario con la opción de imprimirla, editarla o eliminarla
+
 $semana = $ficha["semana"];
 $fecha = fecha_normal($ficha["fecha"]);
 $horas = get_horas_semana($ficha["id_ficha"]);
