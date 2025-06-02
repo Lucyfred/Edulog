@@ -1,3 +1,5 @@
+USE edulog;
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1deb3
 -- https://www.phpmyadmin.net/
