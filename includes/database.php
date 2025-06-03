@@ -1,7 +1,7 @@
 <?php 
 
 // Parámetros de conexión a la base de datos MariaDB
-$server = "127.0.0.1";
+$server = "db";
 $user = "edulog";
 $pass = "edulog";
 $dbname = "edulog";
