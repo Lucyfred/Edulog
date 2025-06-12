@@ -1,41 +1,44 @@
 <h1 align="center">Edulog</h1>
 
+🌐 Available languages: [English](README.md) | [Español](README.es.md)
+
 <p>
-  Edulog es una app de gestión de fichas para los alumnos en prácticas en empresas.
+  Edulog is a card management app for students on internships in companies.
 </p>
 
-## 🚀 Sobre el Proyecto
+## 🚀 About the Project
 
-Este proyecto tiene como objetivo facilitar el seguimiento de las prácticas profesionales mediante una plataforma web que centraliza la gestión y el envío de fichas semanales de los alumnos en prácticas.
+The objective of this project is to facilitate the monitoring of internships through a web platform that centralizes the management and sending of weekly records of interns.
 <br>
 
-## 🎯 Funcionalidad principal
-Solo el usuario administrador (super root) podrá crear o dar de baja a otros usuarios, así como otorgar permisos de administrador a otros.
+## 🎯 Main functionality
+Only the administrator user (super root) will be able to create or delete other users, as well as grant administrator permissions to others.
 
-Cada usuario registrado podrá generar y rellenar su propia ficha de prácticas semanal (u otro período), basada en una plantilla estándar utilizada por institutos públicos.
+Each registered user will be able to generate and fill in his or her own weekly (or other period) internship form, based on a standard template used by public institutes.
 
-El sistema permitirá, en el futuro, que los usuarios puedan subir sus propias plantillas. Se contempla una funcionalidad experimental para detectar automáticamente los campos rellenables o permitir al usuario seleccionar visualmente los campos directamente sobre el documento (futura implementación).
-<br>
-## ☁️ Ventajas del sistema
-Los alumnos podrán guardar, editar o eliminar sus fichas desde la plataforma sin necesidad de enviarlas por email.
-
-Los tutores o encargados de prácticas tendrán acceso a todas las fichas de sus alumnos en un solo lugar, siempre actualizadas.
+In the future, the system will allow users to upload their own templates. An experimental functionality is envisaged to automatically detect fillable fields or to allow the user to visually select the fields directly on the document (future implementation).
 <br>
 
-## 💡 Origen de la idea
-La idea nació en el primer año del curso, al detectar un problema común en la empresa donde realicé mis primeras prácticas: los alumnos no entregaban sus fichas a tiempo, y el responsable no podía remitirlas al profesor adecuadamente. Esta herramienta busca solucionar ese problema real, permitiendo llevar un seguimiento más ágil y organizado de las prácticas.
+## ☁️ System advantages
+- Students will be able to save, edit or delete their cards from the platform without having to send them by email.
 
-## 🐳 Instalación con Docker
+- Tutors or internship managers will have access to all their students' records in one place, always up to date.
 
-Este proyecto incluye una configuración con Docker para facilitar la instalación y despliegue.
+## 💡 Origin of the idea
+The idea was born in the first year of the course, when I detected a common problem in the company where I did my first internship: the students did not hand in their files on time, and the person in charge could not send them to the teacher properly. This tool aims to solve this real problem, allowing a more agile and organized follow-up of the internships.
 
-### 📋 Requisitos
+## 🐳 Installation with Docker
 
-- Tener instalado [Docker](https://www.docker.com/) y [Docker Compose](https://docs.docker.com/compose/)
+This project includes a Docker configuration for easy installation and deployment.
 
-### ⚙️ Pasos para levantar el entorno
+### 📋 Requirements
 
-1. Crea el fichero Dockerfile con este contenido:
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+### ⚙️ Steps to raise the environment
+
+1. Create the Dockerfile with this content:
 
 ```bash
 FROM php:8.2-apache
@@ -49,8 +52,8 @@ RUN rm -rf /var/www/html/* && git clone https://github.com/Lucyfred/Edulog.git \
 /var/www/html/ && chown -R www-data:www-data /var/www/html
 ```
 
-2. Crea el fichero docker-compose.yaml con este contenido:<br>
-⚠️ **IMPORTANTE:** No olvides modificar los datos a tus necesidades, puertos y demás.
+2. Create the file docker-compose.yaml with this content:<br>
+⚠️ **IMPORTANT:** Do not forget to modify the data to your needs, ports and others.
 
 ```bash
 services:
@@ -97,41 +100,41 @@ volumes:
   edulog_data:
 ```
 
-3. Dentro de la carpeta con estos ficheros, ejecuta los siguientes comandos:
+3. Inside the folder with these files, execute the following commands:
 
-Crear la imagen:
+Create the image:
 ```bash
 docker compose build --no-cache
 ```
 
-Crear el contenedor:
+Create container:
 ```bash
 docker compose -p edulog up -d
 ```
 
-✅ Ya estaría el servidor levantado<br>
-Ahora podrás acceder a él con tú dirección IP (donde se localice Docker) y el puerto configurado, en el caso por defecto :8080.
+✅ The server would already be up<br>
+Now you will be able to access it with your IP address (where Docker is located) and the configured port, in the default case: 8080..
 
-## 🔐 Credenciales por defecto
+## 🔐 Default credentials
 
-Estas son las credenciales configuradas por defecto en los contenedores:
+These are the credentials configured by default in the containers:
 
-### 📦 Base de datos (MariaDB)
+### 📦 Database (MariaDB)
 - **Host**: `db`
-- **Puerto**: `3306`
-- **Usuario**: `edulog`
-- **Contraseña**: `edulog`
-- **Base de datos**: `edulog`
-- **Usuario root**: `root`
-- **Contraseña root**: `root`
+- **Port**: `3306`
+- **User**: `edulog`
+- **Password**: `edulog`
+- **Database**: `edulog`
+- **User root**: `root`
+- **Root password**: `root`
 
 ### 🧭 phpMyAdmin
 - **URL**: [http://localhost:8081](http://localhost:8081)
-- **Servidor (host)**: `db`
-- **Usuario**: `root`
-- **Contraseña**: `root`
+- **Server (host)**: `db`
+- **User**: `root`
+- **Password**: `root`
 
-### 🌐 Aplicación web
+### 🌐 Web application
 - **URL**: [http://localhost:8080](http://localhost:8080)
 
-> ⚠️ **Importante**: Cambia estas credenciales en producción para mejorar la seguridad.
+> ⚠️ **Important**: Change these credentials in production to improve security.
